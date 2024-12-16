@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --playbuttontop:140px;
+    --playbuttonstatus: 0;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    display: flex;
+    gap: 6px;
+}
+
+.buttons ul li {
+    display: flex;
+    gap: 15px;
+    width: 14px;
+    list-style: none;
+    padding-top: 14px;
+    font-weight: bold;
+}
+
+.left {
+    width: 35vw;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    background-color: rgb(31, 31, 31);
+    border-radius: 7px;
+    height: 25vh;
+    padding: 0px 13px;
+    gap: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imglo{
+    filter: invert(1);
+    height: 20px;
+    width: 30px;
+}
+
+.tranback{
+    background-color: white;
+}
+
+.buttons>img{
+    height: 40px;
+    width: 120px;
+}
+
+.libraries {
+    background-color: rgb(31, 31, 31);
+    border-radius: 7px;
+    height: 70vh;
+    display: flex;
+    
+}
+
+.libraries ul li {
+    display: flex;
+    gap: 15px;
+    width: 14px;
+    list-style: none;
+    padding-top: 14px;
+    font-weight: bold;
+    display: flex;
+    font-size: 24px;
+}
+
+.libraries ul li img{
+    padding-left: 10px;
+    height: 25px;
+    width: auto;
+}
+
+.right {
+
+    background-color: rgb(31, 31, 31);
+    border-radius: 7px;
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar{
+    background-color: #373737;
+    padding-bottom: 10px;
+}
+
+.mplist{
+    list-style-type: none;
+    display: flex;
+    margin: 10px 20px;
+    gap: 10px;
+}
+
+.mplist li button{
+    padding: 4px 12px;
+    width: auto;
+    height: 35px;
+    border: 0px ;
+    border-radius: 40px;
+    background: #464646;
+    color: white;
+    font-weight: 750;
+}
+
+.loginbar{
+    margin-top: 10px;
+}
+
+.loginbuttons{
+    box-sizing: content-box;
+    list-style-type: none;
+    display: flex;
+    justify-content: end;
+    margin-right: 15px;
+    gap: 15px;
+}
+
+.loginbuttons li{
+    /* border: 2px solid grey; */
+    color: rgb(246, 246, 246);
+    border-radius: 25px;
+    font-weight: 400;
+    padding: 8px 12px;
+}
+
+.playlists{
+    display: flex;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.playlisttiles{
+    margin: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+.card {
+    padding: 10px;
+    border-radius: 10px;
+    width: 15vw;
+    background-color: rgb(61, 61, 61);
+    color: white;
+    position: relative;
+}
+img {
+    width: 100%;
+    border-radius: 5px;
+    color: #25c800;
+}
+.playbutton{
+    width: 30px;
+    height: auto;
+    position: absolute;
+    right: 15px;
+    top: var(--playbuttontop);
+    opacity: var(--playbuttonstatus);
+    transition: all 0.5s;
+}
+.card:hover{
+    --playbuttonstatus: 1;
+    --playbuttontop:115px;
+}
+
+
+.playbar{
+    height: 10vh;
+    width: 65vw;
+    border: solid black 2px;
+    position: absolute;
+    bottom: 5vh;
+}
