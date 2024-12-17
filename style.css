@@ -185,7 +185,23 @@ img {
 .playbar{
     height: 10vh;
     width: 65vw;
+    padding: 10px;
     border: solid black 2px;
+    background-color: #191e19;
     position: absolute;
     bottom: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.songbuttons{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.playbar img{
+    height: 40px;
+    width: auto;
+
 }
