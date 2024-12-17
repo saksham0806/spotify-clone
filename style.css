@@ -66,13 +66,15 @@ body {
     border-radius: 7px;
     height: 70vh;
     display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
     
 }
 
 .libraries ul li {
     display: flex;
     gap: 15px;
-    width: 14px;
+    /* width: 14px; */
     list-style: none;
     padding-top: 14px;
     font-weight: bold;
@@ -197,11 +199,40 @@ img {
 .songbuttons{
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .playbar img{
-    height: 40px;
-    width: auto;
+    height: auto;
+    width: 5vw;
 
+}
+
+.songsnames ul{
+    padding: 0px 10px;
+    /* max-width: fit-content; */
+}
+
+.song{
+    display: flex;
+    border: 3px solid grey;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.songnameart{
+    width: 70%;
+}
+.songname{
+    font-size: large;
+    font-weight: 400;
+}
+
+.artistname{
+    font-weight: 300;
+    font-size: medium;
 }
