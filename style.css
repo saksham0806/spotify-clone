@@ -215,7 +215,7 @@ img {
 
 .song{
     display: flex;
-    border: 3px solid grey;
+    border: 3px solid rgb(65, 65, 65);
     border-radius: 10px;
     width: 100%;
     display: flex;
