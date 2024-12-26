@@ -1,5 +1,7 @@
 console.log("JavaScript is running")
 
+let currentsong = new Audio();
+
 async function getsongs(){
     let get = await fetch("http://127.0.0.1:3000/songs/")
     let response = await get.text()
@@ -13,14 +15,23 @@ async function getsongs(){
             songs.push(element.href.split("/songs/")[1]);
         }
     }
-
+    
     return songs;
 }
 
+
 async function playmusic(track){
-    let audio = new Audio("\\songs\\"+track);
-    console.log(audio.duration);
-    audio.play;
+    currentsong.src = "\\songs\\"+track+".mp3";
+    currentsong.play();
+    pl.src = "images/pause.svg"
+    currentsong.onloadedmetadata = function(){
+        // document.querySelector(".songinfo").innerHTML = currentsong.src;
+        setInterval(() => {    
+            document.querySelector(".songinfo").innerHTML = currentsong.src;
+            document.querySelector(".songtime").innerHTML = currentsong.currentTime +"/"+currentsong.duration;
+        }, 1000);
+    }
+
 }
 
 async function leftbarsongslist(){
@@ -38,21 +49,29 @@ async function leftbarsongslist(){
                         </div>` ;                            
         songul.appendChild(tul)
     }
-
-    let currentsongs;
-    Array.from(document.querySelector(".songsnames").getElementsByTagName("li")).forEach((song)=>{
-        song.addEventListener("click",e=>{
-            playmusic(song.getElementsByClassName("songname")[0].innerHTML.trim());
-            console.log("clicked")
+    
+        Array.from(document.querySelector(".songsnames").getElementsByTagName("li")).forEach((song)=>{
+            song.addEventListener("click",e=>{
+                playmusic(song.getElementsByClassName("songname")[0].innerHTML.trim());
+                console.log("clicked")
+            })
         })
-        console.log(song.getElementsByClassName("songname")[0].innerHTML);
-    })
+        pl.addEventListener("click",()=>{
+            if(currentsong.paused){
+                currentsong.play();
+                pl.src = "images/pause.svg"
+            }
+            else{
+                currentsong.pause();
+                pl.src = "images/playbarplay.svg"
+            }
+        })
+    
 }
 
 leftbarsongslist();
 
 async function main() {
-
 
 }
 
