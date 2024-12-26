@@ -35,7 +35,7 @@ async function leftbarsongslist(){
                                 <div class="artistname">Saksham</div>
                             </div>
                             <img src="images/playbarplay.svg" alt="">
-                        </div>`;
+                        </div>` ;                            
         songul.appendChild(tul)
     }
 
