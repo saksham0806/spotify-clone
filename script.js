@@ -2,6 +2,13 @@ console.log("JavaScript is running")
 
 let currentsong = new Audio();
 
+function timeprocessor(time){
+    let min = Math.floor(time/60);
+    let sec = Math.floor(time%60);
+    return ("00"+min).slice(-2) +":"+("00"+sec).slice(-2) ;
+
+}
+
 async function getsongs(){
     let get = await fetch("http://127.0.0.1:3000/songs/")
     let response = await get.text()
@@ -26,9 +33,12 @@ async function playmusic(track){
     pl.src = "images/pause.svg"
     currentsong.onloadedmetadata = function(){
         // document.querySelector(".songinfo").innerHTML = currentsong.src;
+        document.querySelector(".songinfo").innerHTML = decodeURI(track);
         setInterval(() => {    
-            document.querySelector(".songinfo").innerHTML = currentsong.src;
-            document.querySelector(".songtime").innerHTML = currentsong.currentTime +"/"+currentsong.duration;
+            let ctime = currentsong.currentTime;
+            let totalDuration = currentsong.duration;
+            document.querySelector(".songtime").innerHTML = timeprocessor(ctime) +"/"+ timeprocessor(totalDuration);
+            document.querySelector(".seekcircle").style.left = ctime/totalDuration*100 +"%";
         }, 1000);
     }
 
@@ -53,7 +63,6 @@ async function leftbarsongslist(){
         Array.from(document.querySelector(".songsnames").getElementsByTagName("li")).forEach((song)=>{
             song.addEventListener("click",e=>{
                 playmusic(song.getElementsByClassName("songname")[0].innerHTML.trim());
-                console.log("clicked")
             })
         })
         pl.addEventListener("click",()=>{
@@ -65,6 +74,11 @@ async function leftbarsongslist(){
                 currentsong.pause();
                 pl.src = "images/playbarplay.svg"
             }
+        })
+
+        document.querySelector(".seekbar").addEventListener("click",(e)=>{
+            document.querySelector(".seekcircle").style.left = e.offsetX/e.target.getBoundingClientRect().width*100+"%";
+            currentsong.currentTime = e.offsetX/e.target.getBoundingClientRect().width*currentsong.duration;
         })
     
 }
