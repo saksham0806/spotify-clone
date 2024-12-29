@@ -33,13 +33,13 @@ async function playmusic(track){
     pl.src = "images/pause.svg"
     currentsong.onloadedmetadata = function(){
         // document.querySelector(".songinfo").innerHTML = currentsong.src;
-        document.querySelector(".songinfo").innerHTML = decodeURI(track);
+        document.querySelector(".songinfo").innerHTML = decodeURI(track).replaceAll("-"," ");
         setInterval(() => {    
             let ctime = currentsong.currentTime;
             let totalDuration = currentsong.duration;
             document.querySelector(".songtime").innerHTML = timeprocessor(ctime) +"/"+ timeprocessor(totalDuration);
             document.querySelector(".seekcircle").style.left = ctime/totalDuration*100 +"%";
-        }, 1000);
+        }, 100);
     }
 
 }
@@ -83,11 +83,12 @@ async function leftbarsongslist(){
     
 }
 
-leftbarsongslist();
-
 async function main() {
-
+    document.querySelector(".ham").addEventListener("click",(e)=>{
+        document.querySelector(".left").style.left = "0%" ;
+    })
 }
 
+leftbarsongslist();
 main();
 

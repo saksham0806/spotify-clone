@@ -37,6 +37,8 @@ body {
     gap: 5px;
     display: flex;
     flex-direction: column;
+    position: static;
+    left: 00%;
 }
 
 .buttons {
@@ -104,6 +106,15 @@ body {
 .topbar{
     background-color: #373737;
     padding-bottom: 10px;
+}
+
+.ham{
+    position: absolute;
+    visibility: hidden;
+}
+
+.ham img{
+    width: 40px;
 }
 
 .mplist{
@@ -280,5 +291,37 @@ img {
     border-radius: 20px;
     bottom: -4px;
     left: 0%;
-    transition: left 1s ;
+    transition: left 0.2s ;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .left{
+        width: 80vw;
+        height: 100%;
+        position: absolute;
+        z-index: 10;
+        left: -100%;
+        transition: all 1s;
+        gap: 0px;
+    }
+    .right{
+        width: 100%;
+        height: 100%;
+    }
+
+    .card{
+        width: 100%;
+    }
+    .card:hover{
+        --playbuttontop:200px;
+    }
+
+    .ham{
+        visibility: visible;
+    }
+    .playbar{
+        width: 95%;
+        z-index: 11;
+    }
 }
