@@ -296,6 +296,10 @@ img {
 
 @media screen and (max-width: 1000px) {
 
+    body{
+        background-color: #191e19;
+    }
+
     .left{
         width: 80vw;
         height: 100%;
@@ -323,5 +327,12 @@ img {
     .playbar{
         width: 95%;
         z-index: 11;
+    }
+    .playbar img{
+        width: 30px;
+    }
+
+    .songbuttons{
+        gap: 5px;
     }
 }
