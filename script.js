@@ -9,8 +9,8 @@ function timeprocessor(time) {
 
 }
 
-async function getsongs() {
-    let get = await fetch("/songs/Independant/");
+async function getsongs(path = "Independant") {
+    let get = await fetch("/songs/"+path+"/");
     let response = await get.text()
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -25,26 +25,27 @@ async function getsongs() {
 
     return songs;
 }
+
 async function getalbums() {
     let get = await fetch("/songs/");
     let response = await get.text();
     let div = document.createElement("div");
     div.innerHTML = response;
     let a = div.getElementsByTagName("a");
-    let songs = []
+    let albums = []
     for (let i = 0; i < a.length; i++) {
         let element = a[i];
         if (element.href.endsWith("/")) {
-            songs.push(element.href.split("/songs/")[1]);
+            albums.push(element.href.split("/songs/")[1]);
         }
     }
 
-    return songs;
+    return albums;
 }
 
 
-async function playmusic(track) {
-    currentsong.src = "\\songs\\" + track + ".mp3";
+async function playmusic(track,path = "\\independant\\") {
+    currentsong.src = "\\songs\\"+path + track + ".mp3";
     currentsong.play();
     pl.src = "images/pause.svg"
     currentsong.onloadedmetadata = function () {
@@ -75,6 +76,21 @@ async function displayplaylists(){
                     </div>`;
         cards.append(div);
     }
+    let albumsarray = Array.from(document.querySelector(".playlisttiles").getElementsByClassName("card"));
+    let albumnamearray = [];
+    console.log(albumsarray);
+
+    // albumsarray.forEach((album)=>{
+    //     albumnamearray.push(album.getElementsByTagName("h3")[0].innerHTML);
+    //     album.getElementsByTagName("img")[0].addEventListener("click",()=>{
+    //         console.log("clicked"+album.getElementsByTagName("h3")[0].innerHTML);
+    //         let songsInFolder = await getsongs(album.getElementsByTagName("h3")[0].innerHTML);
+    //         console.log(songsInFolder);
+    //     })
+    // })
+
+    console.log(albumnamearray);
+    
 }
 
 async function leftbarsongslist() {
