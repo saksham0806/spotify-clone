@@ -1,6 +1,8 @@
 console.log("JavaScript is running")
 
 let currentsong = new Audio();
+let songsnamearray = [];
+let songindex = 0;
 
 function timeprocessor(time) {
     let min = Math.floor(time / 60);
@@ -19,7 +21,7 @@ async function getsongs(path = "Independant") {
     for (let i = 0; i < a.length; i++) {
         let element = a[i];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/Independant/")[1]);
+            songs.push(element.href.split("/songs/"+path+"/")[1]);
         }
     }
 
@@ -44,8 +46,8 @@ async function getalbums() {
 }
 
 
-async function playmusic(track,path = "\\independant\\") {
-    currentsong.src = "\\songs\\"+path + track + ".mp3";
+async function playmusic(track,path = "\\independant") {
+    currentsong.src = "\\songs\\"+path +"\\"+ track + ".mp3";
     currentsong.play();
     pl.src = "images/pause.svg"
     currentsong.onloadedmetadata = function () {
@@ -63,12 +65,11 @@ async function playmusic(track,path = "\\independant\\") {
 async function displayplaylists(){
     let playlists = await getalbums();
     let cards = document.querySelector(".playlisttiles");
-    console.log(playlists);
     for(let i=1;i<playlists.length;i++){
         let div = document.createElement("div");
         div.className = "card";
         div.innerHTML = `<img class="playbutton" src="/images/play.svg" alt="">
-                    <img src="https://www.nowbali.co.id/wp-content/uploads/2016/08/Lake-Buyan-5-1024x685.jpg"
+                    <img src=${"/songs/"+playlists[i]+"/"+"cover.jpg"}
                     alt="bali lake image" class="balilake">
                     <div class="description">
                         <h3>${playlists[i].replace("/","")}</h3>
@@ -78,18 +79,16 @@ async function displayplaylists(){
     }
     let albumsarray = Array.from(document.querySelector(".playlisttiles").getElementsByClassName("card"));
     let albumnamearray = [];
-    console.log(albumsarray);
 
-    // albumsarray.forEach((album)=>{
-    //     albumnamearray.push(album.getElementsByTagName("h3")[0].innerHTML);
-    //     album.getElementsByTagName("img")[0].addEventListener("click",()=>{
-    //         console.log("clicked"+album.getElementsByTagName("h3")[0].innerHTML);
-    //         let songsInFolder = await getsongs(album.getElementsByTagName("h3")[0].innerHTML);
-    //         console.log(songsInFolder);
-    //     })
-    // })
-
-    console.log(albumnamearray);
+    albumsarray.forEach((album)=>{
+        albumnamearray.push(album.getElementsByTagName("h3")[0].innerHTML);
+        album.getElementsByTagName("img")[0].addEventListener("click",async ()=>{
+            console.log("clicked "+album.getElementsByTagName("h3")[0].innerHTML);
+            let songsnamearray = await getsongs(album.getElementsByTagName("h3")[0].innerHTML);
+            songindex = 0;
+            playmusic(songsnamearray[0].replace(".mp3",""),album.getElementsByTagName("h3")[0].innerHTML);
+        })
+    })
     
 }
 
@@ -109,8 +108,6 @@ async function leftbarsongslist() {
         songul.appendChild(tul)
     }
     let songsarray = Array.from(document.querySelector(".songsnames").getElementsByTagName("li"));
-    let songsnamearray = [];
-    let songindex = 0;
     songsarray.forEach((song) => {
         songsnamearray.push(song.getElementsByClassName("songname")[0].innerHTML.trim());
         song.addEventListener("click", e => {
@@ -118,6 +115,10 @@ async function leftbarsongslist() {
             playmusic(song.getElementsByClassName("songname")[0].innerHTML.trim());
         })
     })
+
+}
+
+async function playbar(){
 
     pl.addEventListener("click", () => {
         if (currentsong.paused) {
@@ -154,7 +155,6 @@ async function leftbarsongslist() {
     })
 
 }
-
 async function main() {
     document.querySelector(".right").addEventListener("click", (e) => {
         if (document.querySelector(".left").style.left == "0%") {
@@ -169,5 +169,6 @@ async function main() {
 
 displayplaylists();
 leftbarsongslist();
+playbar();
 main();
 
